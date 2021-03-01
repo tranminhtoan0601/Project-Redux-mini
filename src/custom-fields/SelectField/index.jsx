@@ -25,7 +25,7 @@ function SelectField(props) {
   const { field, form, options, label, placeholder, disabled } = props;
   const { name, value } = field;
 
-  // const selectedOption = options.find((option) => option.value === value);
+  const selectedOption = options.find((option) => option.value === value);
 
   const handleSelectedOptionChange = (selectedOption) => {
     const selectedValue = selectedOption
@@ -48,7 +48,7 @@ function SelectField(props) {
       <Select
         id={name}
         {...field}
-        // value={selectedOption}
+        value={selectedOption}
         onChange={handleSelectedOptionChange}
         placeholder={placeholder}
         isDisabled={disabled}
