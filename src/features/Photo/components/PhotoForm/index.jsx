@@ -6,6 +6,7 @@ import { PHOTO_CATEGORY_OPTIONS } from "../../../../constants/global";
 import Images from "../../../../constants/images";
 import InputField from "../../../../custom-fields/InputField";
 import SelectField from "../../../../custom-fields/SelectField";
+import * as Yup from "yup";
 
 PhotoForm.propTypes = {};
 
@@ -15,16 +16,28 @@ function PhotoForm(props) {
   const initiaValues = {
     title: "",
     CategoryId: null,
+    photo: "",
   };
+  const validationSchema = Yup.object().shape({
+    title: Yup.string().required("This filed is required."),
+    CategoryId: Yup.number().required("This filed is required.").nullable(),
+    photo: Yup.string().when("CategoryId", {
+      is: 1,
+      then: Yup.string().required("This field is required"),
+      otherwise: Yup.string().notRequired(),
+    }),
+  });
   // npm i --save react-select
   return (
     <Formik
       initialValues={initiaValues}
+      validationSchema={validationSchema}
       onSubmit={(values) => console.log("Submit: ", values)}
     >
       {(formikProps) => {
         const { values, errors, touched } = formikProps;
         console.log({ values, errors, touched });
+
         return (
           <Form>
             <FastField

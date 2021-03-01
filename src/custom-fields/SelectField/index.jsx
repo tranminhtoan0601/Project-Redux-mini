@@ -24,6 +24,8 @@ SelectField.defaultProps = {
 function SelectField(props) {
   const { field, form, options, label, placeholder, disabled } = props;
   const { name, value } = field;
+  const { errors, touched } = form;
+  const showError = errors[name] && touched[name];
 
   const selectedOption = options.find((option) => option.value === value);
 
@@ -53,7 +55,9 @@ function SelectField(props) {
         placeholder={placeholder}
         isDisabled={disabled}
         options={options}
+        className={showError ? "is-invalid" : ""}
       />
+      <ErrorMessage name={name} component={FormFeedback} />
     </FormGroup>
   );
 }
