@@ -13,14 +13,15 @@ PhotoForm.propTypes = {};
 PhotoForm.defaultProps = {};
 
 function PhotoForm(props) {
-  const initiaValues = {
-    title: "",
-    CategoryId: null,
-    photo: "",
-  };
+  // const initiaValues = {
+  //   title: "",
+  //   CategoryId: null,
+  //   photo: "",
+  // };
+  const { initialValues, isAddMode } = props;
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("This filed is required."),
-    CategoryId: Yup.number().required("This filed is required.").nullable(),
+    categoryId: Yup.number().required("This filed is required.").nullable(),
     photo: Yup.string().when("CategoryId", {
       is: 1,
       then: Yup.string().required("This field is required"),
@@ -30,7 +31,7 @@ function PhotoForm(props) {
   // npm i --save react-select
   return (
     <Formik
-      initialValues={initiaValues}
+      initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={props.onSubmit}
     >
@@ -47,7 +48,7 @@ function PhotoForm(props) {
               placeholder="Eg: Wow nature ..."
             />
             <FastField
-              name="CategoryId"
+              name="categoryId"
               component={SelectField}
               label="Category"
               placeholder="What's your photo category?"
@@ -76,9 +77,9 @@ function PhotoForm(props) {
               </div>
             </FormGroup> */}
             <FormGroup>
-              <Button type="submit" color="primary">
+              <Button type="submit" color={isAddMode ? "primary" : "success"}>
                 {isSubmitting && <Spinner size="sm" />}
-                Add to album
+                {isAddMode ? "Add to album" : "Update your photo"}
               </Button>
             </FormGroup>
           </Form>
