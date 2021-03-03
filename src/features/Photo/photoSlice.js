@@ -82,6 +82,7 @@ const photo = createSlice({
     addPhoto: (state, action) => {
       // const newPhoto = action.payload;
       state.push(action.payload);
+      // localStorage.setItem('abc');
     },
     removePhoto: (state, action) => {
       console.log(action.payload);
