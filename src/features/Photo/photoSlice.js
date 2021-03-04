@@ -81,8 +81,20 @@ const photo = createSlice({
   reducers: {
     addPhoto: (state, action) => {
       // const newPhoto = action.payload;
-      state.push(action.payload);
-      // localStorage.setItem('abc');
+       const abc = state.push(action.payload);
+      // localStorage.setItem('local_images',);
+      localStorage.setItem('local_images',JSON.parse(abc));
+      // if (a) {
+      //   let images = JSON.parse(a);
+
+      //   images.push( action.payload)
+      //   localStorage.setItem('local_images',JSON.stringify(images));
+        
+      // } else {
+      //   const newPhoto = action.payload;
+      //   state.push(newPhoto);
+      //   localStorage.setItem('local_images',JSON.stringify(state));
+      // }
     },
     removePhoto: (state, action) => {
       console.log(action.payload);
