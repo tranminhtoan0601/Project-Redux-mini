@@ -11,8 +11,10 @@ MainPage.propTypes = {};
 
 function MainPage(props) {
   const photos = useSelector((state) => state.photos);
+  // localStorage.getItem("local_images")
+  //   ? JSON.parse(localStorage.getItem("local_images"))
+  //   : [];
   const dispatch = useDispatch();
-  console.log("List of photos: ", photos);
   const history = useHistory();
 
   const handlePhotoEditClick = (photo) => {

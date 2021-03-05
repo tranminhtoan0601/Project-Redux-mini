@@ -74,16 +74,19 @@ const initialPhotos = [
     title: 'Id ex enim non dolore reprehenderit eu ullamco.'
   },
 ];
-
+// const initialPhotos = JSON.parse.('local_images') || [];
 const photo = createSlice({
   name: 'photos',
-  initialState:initialPhotos,
+  // initialState:initialPhotos,
+  initialState:localStorage.getItem("local_images")
+  ? JSON.parse(localStorage.getItem("local_images"))
+  : initialPhotos ,
   reducers: {
     addPhoto: (state, action) => {
+      state.push(action.payload);
       // const newPhoto = action.payload;
-       const abc = state.push(action.payload);
-      // localStorage.setItem('local_images',);
-      localStorage.setItem('local_images',JSON.parse(abc));
+     
+
       // if (a) {
       //   let images = JSON.parse(a);
 
